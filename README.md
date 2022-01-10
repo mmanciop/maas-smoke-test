@@ -37,7 +37,7 @@ This repository provides setup instructions for running functional smoke tests a
     juju run-action <nrpe_unit_name> run-nrpe-check name=check_maas_provisioning --wait
     ```
 
-    Replace in the command above `<nrpe_unit_name>` with the actual unit name of the subordinate `NRPE`](https://charmhub.io/nrpe) running on the host on which you have installed the files of this repository.
+    Replace in the command above `<nrpe_unit_name>` with the actual unit name of the subordinate [`NRPE`](https://charmhub.io/nrpe) running on the host on which you have installed the files of this repository.
 
 1. Customize the `nagios_host/etc/nagios3/conf.d/maas-liveness-check.cfg` to add the right hosts or hostgroups into the `maas_hosts` host group (see the [Nagios3 Documentation](https://assets.nagios.com/downloads/nagioscore/docs/nagioscore/3/en/objectdefinitions.html#hostgroup) for reference.)
 
