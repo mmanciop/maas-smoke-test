@@ -79,7 +79,7 @@ def main():
         print(
             "Couldn't retrieve the MAAS API key."
         )
-        print(f"Exception: {e}")
+        print(f"ERROR - {e}")
         exit(1)
 
     client = None
@@ -89,7 +89,7 @@ def main():
         print(
             "Couldn't log in. Invalid credentials or server not available."
         )
-        print(f"Exception: {e}")
+        print(f"ERROR - {e}")
         exit(1)
 
     myself = client.users.whoami()
@@ -104,9 +104,11 @@ def main():
             signal.alarm(15)
             x = pod.refresh()
         except Exception as e:
-            print(f"Could not refresh pod with id: {p.id}.\nException: {e}")
+            print(f"ERROR - Could not refresh pod with id: {p.id}.\nException: {e}")
             exit(1)
         signal.alarm(0)
+
+    print("OK")
     exit(0)
 
 
