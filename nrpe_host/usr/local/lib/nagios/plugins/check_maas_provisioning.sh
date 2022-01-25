@@ -52,7 +52,7 @@ def timeout_handler(signum, frame):
 def main():
     parser = argparse.ArgumentParser(
         description="Test a MAAS installation can refresh all LXD VM hosts. "
-        + "Returns 0 if all ok or 1 if any of them fail. API key must be stored in env variable 'MAAS_API_KEY', or in a 'maas_api_key' file in the working directory from which this program is launched."
+        + "Returns 0 if all ok or 2 if any of them fail. API key must be stored in env variable 'MAAS_API_KEY', or in a 'maas_api_key' file in the working directory from which this program is launched."
         + "Assumes MAAS runs on standard port 5240 and is http.",
         epilog=" Example usage: python3 maas-lxd-ping.py -t http://192.168.200.16:5240/MAAS/ -u admin",
     )
