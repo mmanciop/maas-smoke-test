@@ -52,7 +52,7 @@ def timeout_handler(signum, frame):
 def main():
     parser = argparse.ArgumentParser(
         description="Test a MAAS installation can refresh all LXD VM hosts. "
-        + "Returns 0 if all ok or 1 if any of them fail. API key must be stored in env variable 'MAAS_API_KEY', or in a 'maas_api_key' file in the working directory from which this program is launched."
+        + "Returns 0 if all ok or 2 if any of them fail. API key must be stored in env variable 'MAAS_API_KEY', or in a 'maas_api_key' file in the working directory from which this program is launched."
         + "Assumes MAAS runs on standard port 5240 and is http.",
         epilog=" Example usage: python3 maas-lxd-ping.py -t http://192.168.200.16:5240/MAAS/ -u admin",
     )
@@ -79,8 +79,8 @@ def main():
         print(
             "Couldn't retrieve the MAAS API key."
         )
-        print(f"Exception: {e}")
-        exit(1)
+        print(f"ERROR - {e}")
+        exit(2)
 
     client = None
     try:
@@ -89,8 +89,8 @@ def main():
         print(
             "Couldn't log in. Invalid credentials or server not available."
         )
-        print(f"Exception: {e}")
-        exit(1)
+        print(f"ERROR - {e}")
+        exit(2)
 
     myself = client.users.whoami()
     assert myself.is_admin, "%s is not an admin" % myself.username
@@ -104,9 +104,11 @@ def main():
             signal.alarm(15)
             x = pod.refresh()
         except Exception as e:
-            print(f"Could not refresh pod with id: {p.id}.\nException: {e}")
-            exit(1)
+            print(f"ERROR - Could not refresh pod with id: {p.id}.\nException: {e}")
+            exit(2)
         signal.alarm(0)
+
+    print("OK")
     exit(0)
 
 
